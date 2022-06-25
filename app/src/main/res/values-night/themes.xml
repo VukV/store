@@ -13,4 +13,8 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="iconStyle" parent="Theme.Vuk_vukovic_rn9420">
+        <item name="color">@color/light_white</item>
+    </style>
 </resources>

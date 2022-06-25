@@ -5,6 +5,16 @@
     <color name="t3">#009C77</color>
     <color name="t2.1">#01CF87</color>
     <color name="t3.1">#018768</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="grey">#272727</color>
+    <color name="light_white">#EDEDED</color>
+    
+    <color name="red_rating">#CA0000</color>
+    <color name="orange_rating">#F17100</color>
+    <color name="yellow_rating">#FFEB3B</color>
+    <color name="light_green_rating">#31C657</color>
+    <color name="green_rating">#08B123</color>
 </resources>
