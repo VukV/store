@@ -9,7 +9,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "rs.raf.jun.vuk_vukovic_rn9420"
+        applicationId "rs.raf.jul.vuk_vukovic_rn9420"
         minSdk 26
         targetSdk 32
         versionCode 1
