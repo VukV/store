@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Shop.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_shop</item>
+        <item name="postSplashScreenTheme">@style/Theme.Vuk_vukovic_rn9420</item>
+    </style>
+</resources>
