@@ -31,5 +31,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private fun initViewPager(){
         binding.viewPager.adapter = PagerAdapter(childFragmentManager)
+        binding.tabLayout.setupWithViewPager(binding.viewPager)
     }
 }

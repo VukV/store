@@ -29,8 +29,8 @@ class PagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(frag
 
     override fun getPageTitle(position: Int): CharSequence {
         return when(position){
-            DISCOVER_FRAGMENT -> getTitleFromR(R.string.discover)
-            else -> getTitleFromR(R.string.profile)
+            DISCOVER_FRAGMENT -> "Discover"
+            else -> "Profile"
         }
     }
 
