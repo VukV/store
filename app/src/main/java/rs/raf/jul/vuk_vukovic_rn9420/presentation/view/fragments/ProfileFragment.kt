@@ -36,7 +36,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun initInfo(){
-        val pictureUrl = sharedPreferences.getString(pictureData, "")
+        val pictureUrl = sharedPreferences.getString(pictureData, "https://sr.wikipedia.org/wiki/%D0%A1%D1%82%D0%B5%D1%84%D0%B0%D0%BD_%D0%94%D1%83%D1%88%D0%B0%D0%BD#/media/%D0%94%D0%B0%D1%82%D0%BE%D1%82%D0%B5%D0%BA%D0%B0:Car_Du%C5%A1an,_Manastir_Lesnovo,_XIV_vek,_Makedonija.jpg")
         Picasso.get().load(pictureUrl).into(binding.userPicture)
 
         val firstName = sharedPreferences.getString(firstNameData, "")

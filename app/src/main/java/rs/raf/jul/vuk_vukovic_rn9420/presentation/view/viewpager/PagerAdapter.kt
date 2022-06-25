@@ -1,14 +1,16 @@
 package rs.raf.jul.vuk_vukovic_rn9420.presentation.view.viewpager
 
+import android.content.Context
 import android.content.res.Resources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import rs.raf.jul.vuk_vukovic_rn9420.R
+import rs.raf.jul.vuk_vukovic_rn9420.application.Store
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.fragments.DiscoverFragment
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.fragments.ProfileFragment
 
-class PagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class PagerAdapter(fragmentManager: FragmentManager, private val context: Context) : FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     companion object {
         private const val FRAGMENT_COUNT = 2
@@ -29,12 +31,12 @@ class PagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(frag
 
     override fun getPageTitle(position: Int): CharSequence {
         return when(position){
-            DISCOVER_FRAGMENT -> "Discover"
-            else -> "Profile"
+            DISCOVER_FRAGMENT -> getTitleFromR(R.string.discover)
+            else -> getTitleFromR(R.string.profile)
         }
     }
 
     private fun getTitleFromR(id: Int): String{
-        return Resources.getSystem().getString(id)
+        return context.getString(id)
     }
 }

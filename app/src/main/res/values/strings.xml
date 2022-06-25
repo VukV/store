@@ -8,4 +8,6 @@
 
     <string name="discover">Discover</string>
     <string name="profile">Profile</string>
+    
+    <string name="cart">Shopping Cart</string>
 </resources>
