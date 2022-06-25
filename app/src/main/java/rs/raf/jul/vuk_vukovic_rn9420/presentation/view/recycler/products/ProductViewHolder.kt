@@ -19,7 +19,9 @@ class ProductViewHolder(
     }
 
     init {
-
+        itemProductBinding.productHolder.setOnClickListener {
+            onProductClicked.invoke(bindingAdapterPosition)
+        }
     }
 
     fun bind(product: Product){
