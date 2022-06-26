@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -55,9 +56,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun renderState(state: UserState){
         when(state){
-            is UserState.LoggedIn -> Timber.e("LOGGED")
-            is UserState.LoggingIn -> Timber.e("INIT")
-            else -> Timber.e("NE VALJA")
+            is UserState.LoggedIn -> continueToApp()
+            is UserState.LoggingIn -> Toast.makeText(context, "Attempting to login...", Toast.LENGTH_SHORT).show()
+            is UserState.Error -> Toast.makeText(context, "Login error!", Toast.LENGTH_LONG).show()
+            else -> return
         }
     }
 
