@@ -34,8 +34,7 @@ class MainActivity : AppCompatActivity() {
             startMainFragment()
         }
         else{
-            //startLoginFragment()
-            startMainFragment()
+            startLoginFragment()
         }
     }
 

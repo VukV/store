@@ -8,11 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import rs.raf.jul.vuk_vukovic_rn9420.R
 import rs.raf.jul.vuk_vukovic_rn9420.databinding.FragmentDiscoverBinding
+import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.products.ProductAdapter
+import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.products.ProductDiffCallback
 
 class DiscoverFragment : Fragment(R.layout.fragment_discover) {
 
     private var _binding: FragmentDiscoverBinding? = null
     private val binding get() = _binding!!
+    private lateinit var adapter: ProductAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,10 +40,23 @@ class DiscoverFragment : Fragment(R.layout.fragment_discover) {
 
     private fun initRecycler(){
         binding.productsRecycler.layoutManager = LinearLayoutManager(context)
-
+        adapter = ProductAdapter(ProductDiffCallback()){
+            startSingleProductFragment(it.id)
+        }
     }
 
     private fun initListeners(){
 
+    }
+
+    private fun startSingleProductFragment(productId: Int){
+        val transaction = activity?.supportFragmentManager?.beginTransaction()
+        transaction?.replace(R.id.fragmentContainerMain, ProductFragment(productId))
+        transaction?.commit()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -47,4 +47,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         binding.viewPager.adapter = PagerAdapter(childFragmentManager, requireContext())
         binding.tabLayout.setupWithViewPager(binding.viewPager)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
