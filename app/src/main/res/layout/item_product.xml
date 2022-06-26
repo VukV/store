@@ -14,9 +14,10 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -69,13 +70,15 @@
             <ImageView
                 android:id="@+id/ratingIcon"
                 android:layout_width="30dp"
-                android:layout_height="30dp">
+                android:layout_height="30dp"
+                android:src="@drawable/ic_rating">
             </ImageView>
             <TextView
                 android:id="@+id/ratingText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_margin="10dp"
+                android:textStyle="bold">
             </TextView>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

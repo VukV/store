@@ -14,7 +14,7 @@
     
     <color name="red_rating">#CA0000</color>
     <color name="orange_rating">#F17100</color>
-    <color name="yellow_rating">#FFEB3B</color>
+    <color name="yellow_rating">#FFC61A</color>
     <color name="light_green_rating">#31C657</color>
     <color name="green_rating">#08B123</color>
 </resources>

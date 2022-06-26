@@ -1,5 +1,6 @@
 package rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.products
 
+import android.graphics.Color
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import rs.raf.jul.vuk_vukovic_rn9420.data.models.product.Product
@@ -11,11 +12,11 @@ class ProductViewHolder(
 ) : RecyclerView.ViewHolder(itemProductBinding.root) {
 
     companion object{
-        private const val red = 0xCA0000
-        private const val orange = 0xF17100
-        private const val yellow = 0xFFEB3B
-        private const val lightGreen = 0x31C657
-        private const val green = 0x08B123
+        private const val red = "#CA0000"
+        private const val orange = "#F17100"
+        private const val yellow = "#FFC61A"
+        private const val lightGreen = "#31C657"
+        private const val green = "#08B123"
     }
 
     init {
@@ -36,24 +37,24 @@ class ProductViewHolder(
 
     private fun setRatingColor(rating: Double){
         if(rating <= 4.2){
-            itemProductBinding.ratingText.setTextColor(red)
-            itemProductBinding.ratingIcon.drawable.setTint(red)
+            itemProductBinding.ratingText.setTextColor(Color.parseColor(red))
+            itemProductBinding.ratingIcon.drawable.setTint(Color.parseColor(red))
         }
-        else if(rating <= 4.4){
-            itemProductBinding.ratingText.setTextColor(orange)
-            itemProductBinding.ratingIcon.drawable.setTint(orange)
+        else if(rating > 4.2 && rating <= 4.4){
+            itemProductBinding.ratingText.setTextColor(Color.parseColor(orange))
+            itemProductBinding.ratingIcon.drawable.setTint(Color.parseColor(orange))
         }
-        else if(rating <= 4.6){
-            itemProductBinding.ratingText.setTextColor(yellow)
-            itemProductBinding.ratingIcon.drawable.setTint(yellow)
+        else if(rating > 4.4 && rating <= 4.6){
+            itemProductBinding.ratingText.setTextColor(Color.parseColor(yellow))
+            itemProductBinding.ratingIcon.drawable.setTint(Color.parseColor(yellow))
         }
-        else if(rating <= 4.8){
-            itemProductBinding.ratingText.setTextColor(lightGreen)
-            itemProductBinding.ratingIcon.drawable.setTint(lightGreen)
+        else if(rating > 4.6 && rating <= 4.8){
+            itemProductBinding.ratingText.setTextColor(Color.parseColor(lightGreen))
+            itemProductBinding.ratingIcon.drawable.setTint(Color.parseColor(lightGreen))
         }
         else{
-            itemProductBinding.ratingText.setTextColor(green)
-            itemProductBinding.ratingIcon.drawable.setTint(green)
+            itemProductBinding.ratingText.setTextColor(Color.parseColor(green))
+            itemProductBinding.ratingIcon.drawable.setTint(Color.parseColor(green))
         }
     }
 }

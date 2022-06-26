@@ -36,7 +36,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.menu_cart -> {
-                //todo open cart
+                //TODO open cart
                 true
             }
             else -> super.onOptionsItemSelected(item)
