@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
@@ -20,6 +21,7 @@ import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.ProductState
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.products.ProductAdapter
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.products.ProductDiffCallback
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.viewmodel.ProductViewModel
+import timber.log.Timber
 
 class DiscoverFragment : Fragment(R.layout.fragment_discover) {
 
@@ -67,7 +69,11 @@ class DiscoverFragment : Fragment(R.layout.fragment_discover) {
     private fun initListeners(){
         binding.searchEditText.doAfterTextChanged {
             val searchTag = it.toString()
-            productViewModel.getAllBySearch(searchTag)
+
+            if (searchTag.isNotBlank()){
+                binding.categorySpinner.setSelection(0)
+                productViewModel.getAllBySearch(searchTag)
+            }
         }
 
         binding.categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -76,7 +82,12 @@ class DiscoverFragment : Fragment(R.layout.fragment_discover) {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                //TODO search by category
+                val category = binding.categorySpinner.adapter.getItem(position)
+
+                if(category.toString() != "Categories"){
+                    clearSearch()
+                    productViewModel.getAllByCategory(category.toString())
+                }
             }
         }
     }
@@ -128,7 +139,8 @@ class DiscoverFragment : Fragment(R.layout.fragment_discover) {
     }
 
     private fun startSingleProductFragment(productId: Int){
-        clearView()
+        clearSearch()
+        clearSpinner()
 
         val transaction = activity?.supportFragmentManager?.beginTransaction()
         transaction?.addToBackStack(null)
@@ -136,9 +148,12 @@ class DiscoverFragment : Fragment(R.layout.fragment_discover) {
         transaction?.commit()
     }
 
-    private fun clearView(){
+    private fun clearSearch(){
         binding.searchEditText.text.clear()
-        //todo spinner
+    }
+
+    private fun clearSpinner(){
+
     }
 
     override fun onDestroyView() {
