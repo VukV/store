@@ -39,92 +39,108 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_margin="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <TextView
+                    android:text="@string/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <TextView
+                    android:id="@+id/priceProductText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_margin="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <TextView
+                    android:text="@string/discount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <TextView
+                    android:id="@+id/discountProductText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_margin="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <TextView
+                    android:text="@string/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <TextView
+                    android:id="@+id/ratingProductText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_margin="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <TextView
+                    android:text="@string/brand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <TextView
+                    android:id="@+id/brandProductText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_margin="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <TextView
+                    android:text="@string/category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <TextView
+                    android:id="@+id/categoryProductText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+            </LinearLayout>
+
             <TextView
-                android:text="@string/price"
+                android:id="@+id/descriptionProductText"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TextView>
-            <TextView
-                android:id="@+id/priceProductText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp">
             </TextView>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-            <TextView
-                android:text="@string/discount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TextView>
-            <TextView
-                android:id="@+id/discountProductText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TextView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-            <TextView
-                android:text="@string/rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TextView>
-            <TextView
-                android:id="@+id/ratingProductText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TextView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-            <TextView
-                android:text="@string/brand"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TextView>
-            <TextView
-                android:id="@+id/brandProductText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TextView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-            <TextView
-                android:text="@string/category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TextView>
-            <TextView
-                android:id="@+id/categoryProductText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TextView>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content">
-        </TextView>
 
     </ScrollView>
 
     <Button
         android:id="@+id/addToCartButton"
+        android:text="@string/add_to_cart"
+        android:background="@drawable/rounded"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
