@@ -41,6 +41,24 @@ class UserViewModel(
         subscriptions.add(subscription)
     }
 
+    override fun logout() {
+        val subscription = userRepository
+            .logout()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    if (it){
+                        userState.value = UserState.LoggedOut
+                    }
+                },
+                {
+                    userState.value = UserState.Error("Logout error!")
+                }
+            )
+        subscriptions.add(subscription)
+    }
+
     override fun onCleared() {
         super.onCleared()
         subscriptions.dispose()

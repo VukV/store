@@ -10,5 +10,6 @@ interface UserContract {
         val userState: LiveData<UserState>
 
         fun login(username: String, password: String)
+        fun logout()
     }
 }

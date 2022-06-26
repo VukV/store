@@ -24,8 +24,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private val userViewModel: UserContract.ViewModel by sharedViewModel<UserViewModel>()
 
-    private val sharedPreferences: SharedPreferences by inject()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,7 +42,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun initListeners(){
         binding.loginButton.setOnClickListener {
-            userViewModel.login("kminchelle", "0lelplR")
+            val username = binding.usernameEditText.text.toString()
+            val password = binding.passwordEditText.text.toString()
+
+            if (username.isNotBlank() && password.isNotBlank()){
+                userViewModel.login(username, password)
+            }
+            else{
+                Toast.makeText(context, "Login input can't be empty!", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -61,10 +67,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             is UserState.Error -> Toast.makeText(context, "Login error!", Toast.LENGTH_LONG).show()
             else -> return
         }
-    }
-
-    private fun loginToSharedPref(){
-        sharedPreferences.edit().putBoolean(alreadyLoggedIn, true).apply()
     }
 
     private fun continueToApp(){
