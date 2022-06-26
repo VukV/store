@@ -56,7 +56,47 @@ class ProductRepositoryImpl(
     }
 
     override fun fetchAllBySearch(searchTag: String): Observable<ProductResource<Unit>> {
-        TODO("Not yet implemented")
+        return remoteDataSource
+            .getAllBySearchTag(searchTag)
+            .doOnNext {
+                val products = it.products.map {
+                    ProductEntity(
+                        id = it.id,
+                        title = it.title,
+                        description = it.description,
+                        price = it.price,
+                        rating = it.rating,
+                        category = it.category,
+                        thumbnail = it.thumbnail
+                    )
+                }
+                localDataSource.deleteAndInsertAll(products)
+            }
+            .map {
+                ProductResource.Success(Unit)
+            }
+    }
+
+    override fun fetchAllByCategory(category: String): Observable<ProductResource<Unit>> {
+        return remoteDataSource
+            .getAllByCategory(category)
+            .doOnNext {
+                val products = it.products.map {
+                    ProductEntity(
+                        id = it.id,
+                        title = it.title,
+                        description = it.description,
+                        price = it.price,
+                        rating = it.rating,
+                        category = it.category,
+                        thumbnail = it.thumbnail
+                    )
+                }
+                localDataSource.deleteAndInsertAll(products)
+            }
+            .map {
+                ProductResource.Success(Unit)
+            }
     }
 
     override fun fetchAllCategories(): Observable<CategoryResource<Unit>> {

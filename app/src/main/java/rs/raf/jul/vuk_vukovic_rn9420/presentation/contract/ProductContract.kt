@@ -11,5 +11,8 @@ interface ProductContract {
 
         fun fetchAll()
         fun getAll()
+
+        fun getAllBySearch(searchTag: String)
+        fun getAllByCategory(category: String)
     }
 }

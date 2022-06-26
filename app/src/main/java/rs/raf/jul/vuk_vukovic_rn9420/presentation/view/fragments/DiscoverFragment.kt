@@ -58,7 +58,8 @@ class DiscoverFragment : Fragment(R.layout.fragment_discover) {
 
     private fun initListeners(){
         binding.searchEditText.doAfterTextChanged {
-            //TODO search
+            val searchTag = it.toString()
+            productViewModel.getAllBySearch(searchTag)
         }
 
         binding.categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{

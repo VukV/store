@@ -3,6 +3,7 @@ package rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.products
 import android.graphics.Color
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import rs.raf.jul.vuk_vukovic_rn9420.R
 import rs.raf.jul.vuk_vukovic_rn9420.data.models.product.Product
 import rs.raf.jul.vuk_vukovic_rn9420.databinding.ItemProductBinding
 
@@ -38,23 +39,23 @@ class ProductViewHolder(
     private fun setRatingColor(rating: Double){
         if(rating <= 4.2){
             itemProductBinding.ratingText.setTextColor(Color.parseColor(red))
-            itemProductBinding.ratingIcon.drawable.setTint(Color.parseColor(red))
+            itemProductBinding.ratingIcon.setImageDrawable(itemView.context.getDrawable(R.drawable.ic_rating_red))
         }
         else if(rating > 4.2 && rating <= 4.4){
             itemProductBinding.ratingText.setTextColor(Color.parseColor(orange))
-            itemProductBinding.ratingIcon.drawable.setTint(Color.parseColor(orange))
+            itemProductBinding.ratingIcon.setImageDrawable(itemView.context.getDrawable(R.drawable.ic_rating_orange))
         }
         else if(rating > 4.4 && rating <= 4.6){
             itemProductBinding.ratingText.setTextColor(Color.parseColor(yellow))
-            itemProductBinding.ratingIcon.drawable.setTint(Color.parseColor(yellow))
+            itemProductBinding.ratingIcon.setImageDrawable(itemView.context.getDrawable(R.drawable.ic_rating_yellow))
         }
         else if(rating > 4.6 && rating <= 4.8){
             itemProductBinding.ratingText.setTextColor(Color.parseColor(lightGreen))
-            itemProductBinding.ratingIcon.drawable.setTint(Color.parseColor(lightGreen))
+            itemProductBinding.ratingIcon.setImageDrawable(itemView.context.getDrawable(R.drawable.ic_rating_light_green))
         }
         else{
             itemProductBinding.ratingText.setTextColor(Color.parseColor(green))
-            itemProductBinding.ratingIcon.drawable.setTint(Color.parseColor(green))
+            itemProductBinding.ratingIcon.setImageDrawable(itemView.context.getDrawable(R.drawable.ic_rating_green))
         }
     }
 }

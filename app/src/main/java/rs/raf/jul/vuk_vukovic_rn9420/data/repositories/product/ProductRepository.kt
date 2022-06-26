@@ -12,6 +12,7 @@ interface ProductRepository {
     fun getAll(): Observable<List<Product>>
 
     fun fetchAllBySearch(searchTag: String): Observable<ProductResource<Unit>>
+    fun fetchAllByCategory(category: String): Observable<ProductResource<Unit>>
 
     fun fetchAllCategories(): Observable<CategoryResource<Unit>>
     fun getAllCategories(): Observable<List<Category>>
