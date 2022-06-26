@@ -16,8 +16,8 @@ class ProductViewHolder(
         private const val red = "#CA0000"
         private const val orange = "#F17100"
         private const val yellow = "#FFC61A"
-        private const val lightGreen = "#31C657"
-        private const val green = "#08B123"
+        private const val lightGreen = "#50E175"
+        private const val green = "#228826"
     }
 
     init {
