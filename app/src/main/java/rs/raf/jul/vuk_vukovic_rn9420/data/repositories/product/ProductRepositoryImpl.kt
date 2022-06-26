@@ -3,12 +3,11 @@ package rs.raf.jul.vuk_vukovic_rn9420.data.repositories.product
 import io.reactivex.Observable
 import rs.raf.jul.vuk_vukovic_rn9420.data.datasources.local.ProductDao
 import rs.raf.jul.vuk_vukovic_rn9420.data.datasources.remote.ProductService
-import rs.raf.jul.vuk_vukovic_rn9420.data.models.category.Category
+import rs.raf.jul.vuk_vukovic_rn9420.data.models.category.CategoryEntity
 import rs.raf.jul.vuk_vukovic_rn9420.data.models.category.CategoryResource
 import rs.raf.jul.vuk_vukovic_rn9420.data.models.product.Product
 import rs.raf.jul.vuk_vukovic_rn9420.data.models.product.ProductEntity
 import rs.raf.jul.vuk_vukovic_rn9420.data.models.product.ProductResource
-import timber.log.Timber
 
 class ProductRepositoryImpl(
     private val localDataSource: ProductDao,
@@ -100,10 +99,26 @@ class ProductRepositoryImpl(
     }
 
     override fun fetchAllCategories(): Observable<CategoryResource<Unit>> {
-        TODO("Not yet implemented")
+        return remoteDataSource
+            .getAllCategories()
+            .doOnNext {
+                val categories = it.map {
+                    CategoryEntity(it)
+                }
+                localDataSource.deleteAndInsertAllCategories(categories)
+            }
+            .map {
+                CategoryResource.Success(Unit)
+            }
     }
 
-    override fun getAllCategories(): Observable<List<Category>> {
-        TODO("Not yet implemented")
+    override fun getAllCategories(): Observable<List<String>> {
+        return localDataSource
+            .getAllCategories()
+            .map {
+                it.map {
+                    it.name
+                }
+            }
     }
 }

@@ -6,9 +6,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
+import rs.raf.jul.vuk_vukovic_rn9420.data.models.category.CategoryResource
 import rs.raf.jul.vuk_vukovic_rn9420.data.models.product.ProductResource
 import rs.raf.jul.vuk_vukovic_rn9420.data.repositories.product.ProductRepository
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.contract.ProductContract
+import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.CategoryState
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.ProductState
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
@@ -20,6 +22,7 @@ class ProductViewModel(
     private val subscriptions = CompositeDisposable()
     private val publishSubject: PublishSubject<String> = PublishSubject.create()
     override val productState: MutableLiveData<ProductState> = MutableLiveData()
+    override val categoryState: MutableLiveData<CategoryState> = MutableLiveData()
 
     init {
         val subscription = publishSubject
@@ -97,6 +100,43 @@ class ProductViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
 
+        subscriptions.add(subscription)
+    }
+
+    override fun fetchCategories() {
+        val subscription = productRepository
+            .fetchAllCategories()
+            .startWith(CategoryResource.Loading("Attempting to fetch"))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    when(it){
+                        is CategoryResource.Loading -> categoryState.value = CategoryState.Loading
+                        is CategoryResource.Success -> categoryState.value = CategoryState.DataFetched
+                        is CategoryResource.Error -> categoryState.value = CategoryState.Error("Server error")
+                    }
+                },
+                {
+                    categoryState.value = CategoryState.Error("Server error")
+                }
+            )
+        subscriptions.add(subscription)
+    }
+
+    override fun getCategories() {
+        val subscription = productRepository
+            .getAllCategories()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    categoryState.value = CategoryState.Success(it)
+                },
+                {
+                    categoryState.value = CategoryState.Error("Data error")
+                }
+            )
         subscriptions.add(subscription)
     }
 }

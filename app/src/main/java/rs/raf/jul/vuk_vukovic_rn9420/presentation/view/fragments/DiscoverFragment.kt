@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
@@ -14,6 +15,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import rs.raf.jul.vuk_vukovic_rn9420.R
 import rs.raf.jul.vuk_vukovic_rn9420.databinding.FragmentDiscoverBinding
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.contract.ProductContract
+import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.CategoryState
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.ProductState
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.products.ProductAdapter
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.products.ProductDiffCallback
@@ -38,13 +40,19 @@ class DiscoverFragment : Fragment(R.layout.fragment_discover) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initSpinner()
         initRecycler()
         initListeners()
         initObservers()
     }
 
-    private fun initSpinner(){
+    private fun initSpinner(categories: List<String>){
+        val spinnerList: MutableList<String> = categories.toMutableList()
+        spinnerList.add(0, "Categories")
+
+        val categoryAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerList)
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        binding.categorySpinner.adapter = categoryAdapter
 
     }
 
@@ -63,12 +71,12 @@ class DiscoverFragment : Fragment(R.layout.fragment_discover) {
         }
 
         binding.categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                TODO("Not yet implemented")
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
             }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                //TODO search by category
             }
         }
     }
@@ -77,6 +85,18 @@ class DiscoverFragment : Fragment(R.layout.fragment_discover) {
         productViewModel.productState.observe(viewLifecycleOwner){
             renderState(it)
         }
+
+        productViewModel.categoryState.observe(viewLifecycleOwner){
+            when(it){
+                is CategoryState.Success -> {
+                    initSpinner(it.categories)
+                }
+                else -> {}
+            }
+        }
+
+        productViewModel.getCategories()
+        productViewModel.fetchCategories()
 
         productViewModel.getAll()
         productViewModel.fetchAll()
@@ -108,10 +128,17 @@ class DiscoverFragment : Fragment(R.layout.fragment_discover) {
     }
 
     private fun startSingleProductFragment(productId: Int){
+        clearView()
+
         val transaction = activity?.supportFragmentManager?.beginTransaction()
         transaction?.addToBackStack(null)
         transaction?.replace(R.id.fragmentContainerMain, ProductFragment(productId))
         transaction?.commit()
+    }
+
+    private fun clearView(){
+        binding.searchEditText.text.clear()
+        //todo spinner
     }
 
     override fun onDestroyView() {

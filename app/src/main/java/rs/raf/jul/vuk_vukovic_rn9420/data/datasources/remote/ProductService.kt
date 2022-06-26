@@ -16,4 +16,7 @@ interface ProductService {
 
     @GET("products/category/{c}")
     fun getAllByCategory(@Path("c") category: String): Observable<ProductResponse>
+
+    @GET("products/categories")
+    fun getAllCategories(): Observable<List<String>>
 }
