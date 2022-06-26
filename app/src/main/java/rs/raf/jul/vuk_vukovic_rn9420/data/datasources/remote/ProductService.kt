@@ -5,6 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 import rs.raf.jul.vuk_vukovic_rn9420.data.models.product.ProductResponse
+import rs.raf.jul.vuk_vukovic_rn9420.data.models.product.SingleProductResponse
 
 interface ProductService {
 
@@ -19,4 +20,7 @@ interface ProductService {
 
     @GET("products/categories")
     fun getAllCategories(): Observable<List<String>>
+
+    @GET("products/{id}")
+    fun getProductById(@Path("id") productId: Int): Observable<SingleProductResponse>
 }
