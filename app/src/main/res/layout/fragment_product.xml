@@ -48,11 +48,15 @@
                 android:gravity="center">
                 <TextView
                     android:text="@string/price"
+                    android:textSize="18sp"
+                    android:layout_marginEnd="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TextView>
                 <TextView
                     android:id="@+id/priceProductText"
+                    android:textSize="18sp"
+                    android:layout_marginStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TextView>
@@ -65,11 +69,15 @@
                 android:gravity="center">
                 <TextView
                     android:text="@string/discount"
+                    android:textSize="18sp"
+                    android:layout_marginEnd="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TextView>
                 <TextView
                     android:id="@+id/discountProductText"
+                    android:textSize="18sp"
+                    android:layout_marginStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TextView>
@@ -82,11 +90,15 @@
                 android:gravity="center">
                 <TextView
                     android:text="@string/rating"
+                    android:textSize="18sp"
+                    android:layout_marginEnd="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TextView>
                 <TextView
                     android:id="@+id/ratingProductText"
+                    android:textSize="18sp"
+                    android:layout_marginStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TextView>
@@ -99,11 +111,15 @@
                 android:gravity="center">
                 <TextView
                     android:text="@string/brand"
+                    android:textSize="18sp"
+                    android:layout_marginEnd="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TextView>
                 <TextView
                     android:id="@+id/brandProductText"
+                    android:textSize="18sp"
+                    android:layout_marginStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TextView>
@@ -116,11 +132,15 @@
                 android:gravity="center">
                 <TextView
                     android:text="@string/category"
+                    android:textSize="18sp"
+                    android:layout_marginEnd="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TextView>
                 <TextView
                     android:id="@+id/categoryProductText"
+                    android:textSize="18sp"
+                    android:layout_marginStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TextView>
@@ -128,8 +148,10 @@
 
             <TextView
                 android:id="@+id/descriptionProductText"
+                android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
                 android:layout_marginStart="50dp"
                 android:layout_marginEnd="50dp">
             </TextView>
@@ -143,7 +165,8 @@
         android:background="@drawable/rounded"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

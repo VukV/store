@@ -8,6 +8,7 @@ import rs.raf.jul.vuk_vukovic_rn9420.data.models.category.CategoryResource
 import rs.raf.jul.vuk_vukovic_rn9420.data.models.product.Product
 import rs.raf.jul.vuk_vukovic_rn9420.data.models.product.ProductEntity
 import rs.raf.jul.vuk_vukovic_rn9420.data.models.product.ProductResource
+import rs.raf.jul.vuk_vukovic_rn9420.data.models.product.SingleProduct
 
 class ProductRepositoryImpl(
     private val localDataSource: ProductDao,
@@ -119,6 +120,24 @@ class ProductRepositoryImpl(
                 it.map {
                     it.name
                 }
+            }
+    }
+
+    override fun fetchSingleProduct(productId: Int): Observable<SingleProduct> {
+        return remoteDataSource
+            .getProductById(productId)
+            .map {
+                SingleProduct(
+                    id = it.id,
+                    title = it.title,
+                    description = it.description,
+                    category = it.category,
+                    price = it.price,
+                    rating = it.rating,
+                    discountPercentage = it.discountPercentage,
+                    brand = it.brand,
+                    images = it.images
+                )
             }
     }
 }

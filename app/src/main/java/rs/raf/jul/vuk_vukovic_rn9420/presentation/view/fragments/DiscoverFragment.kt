@@ -71,7 +71,7 @@ class DiscoverFragment : Fragment(R.layout.fragment_discover) {
             val searchTag = it.toString()
 
             if (searchTag.isNotBlank()){
-                binding.categorySpinner.setSelection(0)
+                clearSpinner()
                 productViewModel.getAllBySearch(searchTag)
             }
         }
@@ -153,7 +153,7 @@ class DiscoverFragment : Fragment(R.layout.fragment_discover) {
     }
 
     private fun clearSpinner(){
-
+        binding.categorySpinner.setSelection(0)
     }
 
     override fun onDestroyView() {

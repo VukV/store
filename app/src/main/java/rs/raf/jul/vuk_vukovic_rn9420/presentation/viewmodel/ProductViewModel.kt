@@ -12,6 +12,7 @@ import rs.raf.jul.vuk_vukovic_rn9420.data.repositories.product.ProductRepository
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.contract.ProductContract
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.CategoryState
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.ProductState
+import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.SingleProductState
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
@@ -23,6 +24,7 @@ class ProductViewModel(
     private val publishSubject: PublishSubject<String> = PublishSubject.create()
     override val productState: MutableLiveData<ProductState> = MutableLiveData()
     override val categoryState: MutableLiveData<CategoryState> = MutableLiveData()
+    override val singleProductState: MutableLiveData<SingleProductState> = MutableLiveData()
 
     init {
         val subscription = publishSubject
@@ -138,5 +140,25 @@ class ProductViewModel(
                 }
             )
         subscriptions.add(subscription)
+    }
+
+    override fun fetchSingleProduct(productId: Int) {
+        val subscription = productRepository
+            .fetchSingleProduct(productId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    singleProductState.value = SingleProductState.Success(it)
+                },
+                {
+                    singleProductState.value = SingleProductState.Error("Fetch error")
+                }
+            )
+        subscriptions.add(subscription)
+    }
+
+    override fun clearProduct(){
+        singleProductState.value = SingleProductState.NoData
     }
 }
