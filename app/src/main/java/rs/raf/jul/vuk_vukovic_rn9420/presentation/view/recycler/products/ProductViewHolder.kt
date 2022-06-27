@@ -33,7 +33,12 @@ class ProductViewHolder(
         itemProductBinding.ratingText.text = product.rating.toString()
         setRatingColor(product.rating)
 
-        Picasso.get().load(product.thumbnail).into(itemProductBinding.productImageView)
+        Picasso
+            .get()
+            .load(product.thumbnail)
+            .resize(200, 200)
+            .centerCrop()
+            .into(itemProductBinding.productImageView)
     }
 
     private fun setRatingColor(rating: Double){

@@ -43,7 +43,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private fun initInfo(){
         val pictureUrl = sharedPreferences.getString(pictureData, null)
         if (pictureUrl != null){
-            Picasso.get().load(pictureUrl).into(binding.userPicture)
+            Picasso
+                .get()
+                .load(pictureUrl)
+                .resize(600, 600)
+                .centerCrop()
+                .into(binding.userPicture)
         }
 
         val firstName = sharedPreferences.getString(firstNameData, "")

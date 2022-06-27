@@ -17,6 +17,7 @@ import rs.raf.jul.vuk_vukovic_rn9420.databinding.FragmentProductBinding
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.contract.ProductContract
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.ProductState
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.SingleProductState
+import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.productimage.ProductImageAdapter
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.products.ProductViewHolder
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.viewmodel.ProductViewModel
 
@@ -24,6 +25,7 @@ class ProductFragment(private val productId: Int) : Fragment(R.layout.fragment_p
 
     private var _binding: FragmentProductBinding? = null
     private val binding get() = _binding!!
+    private lateinit var adapter: ProductImageAdapter
     private val productViewModel: ProductContract.ViewModel by sharedViewModel<ProductViewModel>()
 
     companion object{
@@ -53,8 +55,8 @@ class ProductFragment(private val productId: Int) : Fragment(R.layout.fragment_p
 
     private fun initRecycler(){
         binding.imagesRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        //TODO adapter
-        binding.imagesRecyclerView.adapter = null
+        adapter = ProductImageAdapter()
+        binding.imagesRecyclerView.adapter = adapter
     }
 
     private fun initListeners(){
@@ -75,7 +77,7 @@ class ProductFragment(private val productId: Int) : Fragment(R.layout.fragment_p
         when(state){
             is SingleProductState.Success -> {
                 showLoadingState(false)
-                //todo adapter submitList
+                adapter.submitList(state.product.images)
                 fillProductInfo(state.product)
             }
             is SingleProductState.Error -> {
@@ -83,6 +85,10 @@ class ProductFragment(private val productId: Int) : Fragment(R.layout.fragment_p
                 Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
             }
             is SingleProductState.NoData -> showLoadingState(true)
+            is SingleProductState.AddedToCart -> {
+                Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
+                requireActivity().onBackPressed()
+            }
         }
     }
 
