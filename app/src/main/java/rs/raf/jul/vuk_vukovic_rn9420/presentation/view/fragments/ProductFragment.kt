@@ -14,11 +14,15 @@ import rs.raf.jul.vuk_vukovic_rn9420.R
 import rs.raf.jul.vuk_vukovic_rn9420.data.models.product.Product
 import rs.raf.jul.vuk_vukovic_rn9420.data.models.product.SingleProduct
 import rs.raf.jul.vuk_vukovic_rn9420.databinding.FragmentProductBinding
+import rs.raf.jul.vuk_vukovic_rn9420.presentation.contract.CartContract
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.contract.ProductContract
+import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.AddToCartState
+import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.CartState
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.ProductState
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.SingleProductState
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.productimage.ProductImageAdapter
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.products.ProductViewHolder
+import rs.raf.jul.vuk_vukovic_rn9420.presentation.viewmodel.CartViewModel
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.viewmodel.ProductViewModel
 
 class ProductFragment(private val productId: Int) : Fragment(R.layout.fragment_product) {
@@ -27,6 +31,7 @@ class ProductFragment(private val productId: Int) : Fragment(R.layout.fragment_p
     private val binding get() = _binding!!
     private lateinit var adapter: ProductImageAdapter
     private val productViewModel: ProductContract.ViewModel by sharedViewModel<ProductViewModel>()
+    private val cartViewModel: CartContract.ViewModel by sharedViewModel<CartViewModel>()
 
     companion object{
         private const val red = "#CA0000"
@@ -70,7 +75,9 @@ class ProductFragment(private val productId: Int) : Fragment(R.layout.fragment_p
             renderState(it)
         }
 
-        //todo observe cart vm
+        cartViewModel.addToCartState.observe(viewLifecycleOwner){
+            renderCartState(it)
+        }
 
         productViewModel.fetchSingleProduct(productId)
     }
@@ -87,12 +94,19 @@ class ProductFragment(private val productId: Int) : Fragment(R.layout.fragment_p
                 Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
             }
             is SingleProductState.NoData -> showLoadingState(true)
+        }
+    }
 
-            //todo remove
-            is SingleProductState.AddedToCart -> {
+    private fun renderCartState(state: AddToCartState){
+        when(state){
+            is AddToCartState.Added -> {
                 Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
                 requireActivity().onBackPressed()
             }
+            is AddToCartState.Error -> {
+                Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
+            }
+            else -> return
         }
     }
 
@@ -135,6 +149,6 @@ class ProductFragment(private val productId: Int) : Fragment(R.layout.fragment_p
         super.onDestroyView()
         _binding = null
         productViewModel.clearProduct()
-        //todo cartVM - idle
+        cartViewModel.idle()
     }
 }

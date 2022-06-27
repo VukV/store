@@ -6,7 +6,4 @@ sealed class SingleProductState {
     object NoData: SingleProductState()
     data class Success(val product: SingleProduct): SingleProductState()
     data class Error(val message: String): SingleProductState()
-
-    //todo remove
-    data class AddedToCart(val message: String): SingleProductState()
 }

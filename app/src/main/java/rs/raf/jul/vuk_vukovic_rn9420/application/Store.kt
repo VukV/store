@@ -7,6 +7,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.fragment.koin.fragmentFactory
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
+import rs.raf.jul.vuk_vukovic_rn9420.modules.cartModule
 import rs.raf.jul.vuk_vukovic_rn9420.modules.coreModule
 import rs.raf.jul.vuk_vukovic_rn9420.modules.productModule
 import rs.raf.jul.vuk_vukovic_rn9420.modules.userModule
@@ -26,7 +27,7 @@ class Store : Application() {
     }
 
     private fun setupKoin(){
-        val modules = listOf(coreModule, userModule, productModule)
+        val modules = listOf(coreModule, userModule, productModule, cartModule)
 
         startKoin {
             androidLogger(Level.ERROR)

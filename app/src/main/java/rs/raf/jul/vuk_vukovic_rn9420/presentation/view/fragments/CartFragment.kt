@@ -41,4 +41,9 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
     private fun initRecycler() {
         TODO("Not yet implemented")
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
