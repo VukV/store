@@ -36,7 +36,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.menu_cart -> {
-                //TODO open cart
+                openCartFragment()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -46,6 +46,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun initViewPager(){
         binding.viewPager.adapter = PagerAdapter(childFragmentManager, requireContext())
         binding.tabLayout.setupWithViewPager(binding.viewPager)
+    }
+
+    private fun openCartFragment(){
+        val transaction = activity?.supportFragmentManager?.beginTransaction()
+        transaction?.addToBackStack(null)
+        transaction?.replace(R.id.fragmentContainerMain, CartFragment())
+        transaction?.commit()
     }
 
     override fun onDestroyView() {

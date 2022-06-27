@@ -4,5 +4,6 @@ interface CartContract {
 
     interface ViewModel{
 
+
     }
 }

@@ -20,4 +20,5 @@
     <string name="category">Category:</string>
 
     <string name="add_to_cart">Add To Cart</string>
+    <string name="my_cart">My Cart</string>
 </resources>

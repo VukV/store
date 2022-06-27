@@ -70,6 +70,8 @@ class ProductFragment(private val productId: Int) : Fragment(R.layout.fragment_p
             renderState(it)
         }
 
+        //todo observe cart vm
+
         productViewModel.fetchSingleProduct(productId)
     }
 
@@ -85,6 +87,8 @@ class ProductFragment(private val productId: Int) : Fragment(R.layout.fragment_p
                 Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
             }
             is SingleProductState.NoData -> showLoadingState(true)
+
+            //todo remove
             is SingleProductState.AddedToCart -> {
                 Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
                 requireActivity().onBackPressed()
@@ -131,5 +135,6 @@ class ProductFragment(private val productId: Int) : Fragment(R.layout.fragment_p
         super.onDestroyView()
         _binding = null
         productViewModel.clearProduct()
+        //todo cartVM - idle
     }
 }
