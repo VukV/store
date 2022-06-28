@@ -43,7 +43,10 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
     }
 
     private fun initListeners() {
-        //TODO
+        binding.payButton.setOnClickListener {
+            //todo pay
+            cartViewModel.removeAllFromCart()
+        }
     }
 
     private fun initRecycler() {
