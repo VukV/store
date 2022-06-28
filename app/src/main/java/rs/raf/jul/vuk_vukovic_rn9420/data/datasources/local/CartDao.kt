@@ -5,6 +5,7 @@ import androidx.room.*
 import io.reactivex.Completable
 import io.reactivex.Observable
 import rs.raf.jul.vuk_vukovic_rn9420.data.models.cart.CartProductEntity
+import timber.log.Timber
 
 @Dao
 abstract class CartDao {
@@ -16,18 +17,20 @@ abstract class CartDao {
     abstract fun removeAllByUser(username: String): Completable
 
     @Insert
-    abstract fun addCartProduct(cartProduct: CartProductEntity)
+    abstract fun addCartProduct(cartProduct: CartProductEntity): Completable
 
     @Update
-    abstract fun updateCartProduct(cartProduct: CartProductEntity)
+    abstract fun updateCartProduct(cartProduct: CartProductEntity): Completable
 
     fun addToCart(cartProduct: CartProductEntity){
         try {
-            addCartProduct(cartProduct)
+            Timber.e("USAO U TRY")
+            addCartProduct(cartProduct).blockingAwait()
         }
         catch (e: SQLiteConstraintException){
+            Timber.e("USAO U CATCH")
             cartProduct.amount = cartProduct.amount + 1
-            updateCartProduct(cartProduct)
+            updateCartProduct(cartProduct).blockingAwait()
         }
     }
 

@@ -10,6 +10,6 @@ import rs.raf.jul.vuk_vukovic_rn9420.presentation.viewmodel.CartViewModel
 val cartModule = module {
 
     viewModel { CartViewModel(cartRepository = get()) }
-    single<CartRepository> { CartRepositoryImpl(dataSource = get()) }
+    single<CartRepository> { CartRepositoryImpl(dataSource = get(), sharedPreferences = get()) }
     single { get<Database>().getCartDao() }
 }

@@ -66,7 +66,9 @@ class ProductFragment(private val productId: Int) : Fragment(R.layout.fragment_p
 
     private fun initListeners(){
         binding.addToCartButton.setOnClickListener {
-            //TODO
+            val title: String = binding.titleText.text.toString()
+            val price: Double = binding.priceProductText.text.toString().toDouble()
+            cartViewModel.addToCart(id = productId, title = title, price = price)
         }
     }
 

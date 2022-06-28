@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import rs.raf.jul.vuk_vukovic_rn9420.R
 import rs.raf.jul.vuk_vukovic_rn9420.databinding.FragmentCartBinding
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.contract.CartContract
+import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.CartState
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.cart.CartAdapter
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.cart.CartDiffCallback
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.viewmodel.CartViewModel
@@ -38,13 +40,8 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         initObservers()
     }
 
-    private fun initObservers() {
-        //TODO
-    }
-
     private fun initListeners() {
         binding.payButton.setOnClickListener {
-            //todo pay
             cartViewModel.removeAllFromCart()
         }
     }
@@ -52,9 +49,35 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
     private fun initRecycler() {
         binding.cartRecycler.layoutManager = LinearLayoutManager(context)
         adapter = CartAdapter(CartDiffCallback()){
-            //TODO remove from cart
+            //cartViewModel.removeFromCart(it.id)
+            Toast.makeText(context, "Delete ${it.title}", Toast.LENGTH_SHORT).show()
         }
         binding.cartRecycler.adapter = adapter
+    }
+
+    private fun initObservers() {
+        cartViewModel.cartState.observe(viewLifecycleOwner){
+            renderState(it)
+        }
+
+        //todo get total price (price state) -> observe -> set to button
+        cartViewModel.getAllFromCart()
+    }
+
+    private fun renderState(state: CartState){
+        when(state){
+            is CartState.Idle -> return
+            is CartState.Error -> {
+                Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
+            }
+            is CartState.Emptied -> {
+                Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
+                requireActivity().onBackPressed()
+            }
+            is CartState.Success -> {
+                adapter.submitList(state.cart)
+            }
+        }
     }
 
     override fun onDestroyView() {
