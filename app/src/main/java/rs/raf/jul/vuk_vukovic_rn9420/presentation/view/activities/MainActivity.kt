@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import org.koin.android.ext.android.inject
-import org.koin.experimental.property.inject
 import rs.raf.jul.vuk_vukovic_rn9420.data.alreadyLoggedIn
 import rs.raf.jul.vuk_vukovic_rn9420.databinding.ActivityMainBinding
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.fragments.LoginFragment

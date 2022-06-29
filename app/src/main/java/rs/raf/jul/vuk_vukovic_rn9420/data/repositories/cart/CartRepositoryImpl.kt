@@ -1,7 +1,6 @@
 package rs.raf.jul.vuk_vukovic_rn9420.data.repositories.cart
 
 import android.content.SharedPreferences
-import android.database.sqlite.SQLiteConstraintException
 import io.reactivex.Completable
 import io.reactivex.Observable
 import rs.raf.jul.vuk_vukovic_rn9420.data.datasources.local.CartDao
@@ -47,15 +46,7 @@ class CartRepositoryImpl(
             price = price
         )
 
-        //TODO FIX!
-        return try {
-            dataSource.addCartProduct(cartProductEntity)
-        } catch (e: SQLiteConstraintException){
-            cartProductEntity.amount = cartProductEntity.amount + 1
-            dataSource.updateCartProduct(cartProductEntity)
-        }
-
-        //dataSource.addToCart(cartProductEntity)
+        return dataSource.addToCart(cartProductEntity)
     }
 
     override fun removeFromCart(productId: Int): Completable {

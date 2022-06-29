@@ -2,7 +2,6 @@ package rs.raf.jul.vuk_vukovic_rn9420.modules
 
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
-import rs.raf.jul.vuk_vukovic_rn9420.data.datasources.local.Database
 import rs.raf.jul.vuk_vukovic_rn9420.data.datasources.remote.UserService
 import rs.raf.jul.vuk_vukovic_rn9420.data.repositories.user.UserRepository
 import rs.raf.jul.vuk_vukovic_rn9420.data.repositories.user.UserRepositoryImpl

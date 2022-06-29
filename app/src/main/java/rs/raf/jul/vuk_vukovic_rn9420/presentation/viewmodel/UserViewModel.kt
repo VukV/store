@@ -1,13 +1,10 @@
 package rs.raf.jul.vuk_vukovic_rn9420.presentation.viewmodel
 
-import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import org.koin.android.ext.android.inject
-import org.koin.experimental.property.inject
 import rs.raf.jul.vuk_vukovic_rn9420.data.models.user.UserResource
 import rs.raf.jul.vuk_vukovic_rn9420.data.repositories.user.UserRepository
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.contract.UserContract

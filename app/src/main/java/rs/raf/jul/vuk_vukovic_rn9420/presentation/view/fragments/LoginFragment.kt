@@ -1,21 +1,17 @@
 package rs.raf.jul.vuk_vukovic_rn9420.presentation.view.fragments
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import rs.raf.jul.vuk_vukovic_rn9420.R
-import rs.raf.jul.vuk_vukovic_rn9420.data.alreadyLoggedIn
 import rs.raf.jul.vuk_vukovic_rn9420.databinding.FragmentLoginBinding
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.contract.UserContract
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.UserState
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.viewmodel.UserViewModel
-import timber.log.Timber
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 

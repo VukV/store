@@ -11,17 +11,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import rs.raf.jul.vuk_vukovic_rn9420.R
-import rs.raf.jul.vuk_vukovic_rn9420.data.models.product.Product
 import rs.raf.jul.vuk_vukovic_rn9420.data.models.product.SingleProduct
 import rs.raf.jul.vuk_vukovic_rn9420.databinding.FragmentProductBinding
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.contract.CartContract
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.contract.ProductContract
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.AddToCartState
-import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.CartState
-import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.ProductState
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.SingleProductState
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.productimage.ProductImageAdapter
-import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.products.ProductViewHolder
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.viewmodel.CartViewModel
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.viewmodel.ProductViewModel
 

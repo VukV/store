@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
@@ -21,7 +20,6 @@ import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.ProductState
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.products.ProductAdapter
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.products.ProductDiffCallback
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.viewmodel.ProductViewModel
-import timber.log.Timber
 
 class DiscoverFragment : Fragment(R.layout.fragment_discover) {
 

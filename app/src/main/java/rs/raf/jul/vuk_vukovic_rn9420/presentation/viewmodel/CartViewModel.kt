@@ -73,7 +73,7 @@ class CartViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                    //cartState.value = CartState.Emptied("Transaction done")
+                    return@subscribe
                 },
                 {
                     cartState.value = CartState.Error("Data error")

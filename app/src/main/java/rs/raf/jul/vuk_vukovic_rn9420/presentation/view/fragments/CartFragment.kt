@@ -49,8 +49,7 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
     private fun initRecycler() {
         binding.cartRecycler.layoutManager = LinearLayoutManager(context)
         adapter = CartAdapter(CartDiffCallback()){
-            //cartViewModel.removeFromCart(it.id)
-            Toast.makeText(context, "Delete ${it.title}", Toast.LENGTH_SHORT).show()
+            cartViewModel.removeFromCart(it.id)
         }
         binding.cartRecycler.adapter = adapter
     }
@@ -83,5 +82,6 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        cartViewModel.idle()
     }
 }

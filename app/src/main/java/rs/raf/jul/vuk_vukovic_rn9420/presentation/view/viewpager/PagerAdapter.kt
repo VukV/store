@@ -1,12 +1,10 @@
 package rs.raf.jul.vuk_vukovic_rn9420.presentation.view.viewpager
 
 import android.content.Context
-import android.content.res.Resources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import rs.raf.jul.vuk_vukovic_rn9420.R
-import rs.raf.jul.vuk_vukovic_rn9420.application.Store
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.fragments.DiscoverFragment
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.fragments.ProfileFragment
 
