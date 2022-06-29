@@ -53,4 +53,16 @@ class CartRepositoryImpl(
         val username = sharedPreferences.getString(usernameData, "")
         return dataSource.removeFromCartByUser(username!!, productId)
     }
+
+    override fun getTotalPrice(): Observable<Double> {
+        val username = sharedPreferences.getString(usernameData, "")
+
+        return dataSource
+            .getAllByUser(username!!)
+            .map {
+                it.sumOf {
+                    it.price * it.amount
+                }
+            }
+    }
 }

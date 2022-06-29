@@ -12,6 +12,7 @@ import rs.raf.jul.vuk_vukovic_rn9420.R
 import rs.raf.jul.vuk_vukovic_rn9420.databinding.FragmentCartBinding
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.contract.CartContract
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.CartState
+import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.PriceState
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.cart.CartAdapter
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.view.recycler.cart.CartDiffCallback
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.viewmodel.CartViewModel
@@ -59,8 +60,12 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
             renderState(it)
         }
 
-        //todo get total price (price state) -> observe -> set to button
+        cartViewModel.priceState.observe(viewLifecycleOwner){
+            renderTotalPrice(it)
+        }
+
         cartViewModel.getAllFromCart()
+        cartViewModel.getTotalPrice()
     }
 
     private fun renderState(state: CartState){
@@ -75,6 +80,17 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
             }
             is CartState.Success -> {
                 adapter.submitList(state.cart)
+            }
+        }
+    }
+
+    private fun renderTotalPrice(state: PriceState){
+        when(state){
+            is PriceState.Idle -> return
+            is PriceState.Error -> Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
+            is PriceState.Success -> {
+                val buttonText = "${getString(R.string.pay)} ${state.totalPrice}"
+                binding.payButton.text = buttonText
             }
         }
     }

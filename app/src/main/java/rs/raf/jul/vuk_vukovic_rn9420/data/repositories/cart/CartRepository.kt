@@ -11,4 +11,6 @@ interface CartRepository {
 
     fun addToCart(id: Int, amount: Int = 1, title: String, price: Double): Completable
     fun removeFromCart(productId: Int): Completable
+
+    fun getTotalPrice(): Observable<Double>
 }

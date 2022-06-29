@@ -42,11 +42,11 @@ class ProductViewModel(
             .subscribe(
                 {
                     //TODO
-                    // kako postaviti ProductState ako imam Unit?
+                    // kako postaviti ProductState.Success sa listom proizvoda ako imam Unit?
                     // jer ako mi Repository direktno vrati List<Product>, onda ne radim preko Resource-a
                 },
                 {
-
+                    productState.value = ProductState.Error("Data error")
                 }
             )
         subscriptions.add(subscription)

@@ -9,6 +9,7 @@ import rs.raf.jul.vuk_vukovic_rn9420.data.repositories.cart.CartRepository
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.contract.CartContract
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.AddToCartState
 import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.CartState
+import rs.raf.jul.vuk_vukovic_rn9420.presentation.states.PriceState
 
 class CartViewModel(
     private val cartRepository: CartRepository
@@ -17,6 +18,7 @@ class CartViewModel(
     private val subscriptions = CompositeDisposable()
     override val cartState: MutableLiveData<CartState> = MutableLiveData()
     override val addToCartState: MutableLiveData<AddToCartState> = MutableLiveData()
+    override val priceState: MutableLiveData<PriceState> = MutableLiveData()
 
     override fun getAllFromCart() {
         val subscription = cartRepository
@@ -82,8 +84,25 @@ class CartViewModel(
         subscriptions.add(subscription)
     }
 
+    override fun getTotalPrice() {
+        val subscription = cartRepository
+            .getTotalPrice()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    priceState.value = PriceState.Success(it)
+                },
+                {
+                    priceState.value = PriceState.Error("Data error")
+                }
+            )
+        subscriptions.add(subscription)
+    }
+
     override fun idle() {
         addToCartState.value = AddToCartState.Idle
         cartState.value = CartState.Idle
+        priceState.value = PriceState.Idle
     }
 }
