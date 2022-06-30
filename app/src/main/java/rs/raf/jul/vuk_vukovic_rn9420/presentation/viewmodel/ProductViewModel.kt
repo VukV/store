@@ -33,6 +33,7 @@ class ProductViewModel(
             .switchMap {
                 productRepository
                     .fetchAllBySearch(it)
+                    .startWith(ProductResource.Loading())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnError {
@@ -41,9 +42,11 @@ class ProductViewModel(
             }
             .subscribe(
                 {
-                    //TODO
-                    // kako postaviti ProductState.Success sa listom proizvoda ako imam Unit?
-                    // jer ako mi Repository direktno vrati List<Product>, onda ne radim preko Resource-a
+                    when(it){
+                        is ProductResource.Loading -> productState.value = ProductState.Loading
+                        is ProductResource.Success -> productState.value = ProductState.DataFetched
+                        is ProductResource.Error -> productState.value = ProductState.Error("Server error")
+                    }
                 },
                 {
                     productState.value = ProductState.Error("Data error")
@@ -98,9 +101,22 @@ class ProductViewModel(
     override fun getAllByCategory(category: String) {
         val subscription = productRepository
             .fetchAllByCategory(category)
+            .startWith(ProductResource.Loading())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
+            .subscribe(
+                {
+                    when(it){
+                        is ProductResource.Loading -> productState.value = ProductState.Loading
+                        is ProductResource.Success -> productState.value = ProductState.DataFetched
+                        is ProductResource.Error -> productState.value = ProductState.Error("Server error")
+                    }
+                },
+                {
+                    productState.value = ProductState.Error("Server error")
+                    Timber.e(it)
+                }
+            )
 
         subscriptions.add(subscription)
     }

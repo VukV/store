@@ -132,8 +132,6 @@ class DiscoverFragment : Fragment(R.layout.fragment_discover) {
 
     private fun showLoadingState(loading: Boolean) {
         binding.progressBar.isVisible = loading
-        binding.searchEditText.isEnabled = !loading
-        binding.categorySpinner.isEnabled = !loading
     }
 
     private fun startSingleProductFragment(productId: Int){
